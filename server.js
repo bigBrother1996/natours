@@ -9,7 +9,7 @@ process.on('uncaughtException', err => {
 });
 
 const app = require('./app');
-////remote database
+//remote database
 // const DB = process.env.REMOTE_DATABASE.replace(
 //   '<password>',
 //   process.env.DATABASE_PASSWORD

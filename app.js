@@ -58,6 +58,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
+app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
 
 app.all('*', (req, res, next) => {
   next(
