@@ -375,7 +375,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   opacity: 0.85;
 }
 
@@ -779,7 +783,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   padding: 4rem 0;
 }
 .user-view__content {
@@ -1115,7 +1123,11 @@ body {
     from(#7dd56f),
     to(#28b487)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right bottom,
+    #7dd56f,
+    #28b487
+  );
   opacity: 0.7;
 }
 .card__picture-img {

@@ -1,0 +1,21 @@
+<!doctype html>
+html
+    block head 
+        meta(charset="UTF-8")
+        link(rel="stylesheet" href="/css/style.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700" )
+        link(rel="shortcut icon" href="img/favicon.png" type="image/png")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Natours | #{title}     
+body
+    include ./header
+
+    // content
+    block content
+        h1 this is the placeholder content
+    // footer    
+    include ./footer
+
+    //- script(src='/js/mapbox.js')
+    //- script(src='/js/login.js')
+    script(src='/js/bundle.js')

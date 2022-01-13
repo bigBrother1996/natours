@@ -1,3 +1,4 @@
+const path = require('path');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -8,7 +9,11 @@ const hpp = require('hpp');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const cookieParser = require('cookie-parser');
 const app = express();
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 // GLOBAL middlewares
 //set security HTTP headers
 app.use(helmet());
@@ -16,13 +21,15 @@ app.use(helmet());
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message:
-    'Too many request from this IP, please try again  in an hour'
+  message: 'Too many request from this IP, please try again  in an hour'
 });
 app.use('/api', limiter);
 
 // Body parser, reading date from req.body
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -42,7 +49,7 @@ app.use(
   })
 );
 // Serving static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -51,17 +58,17 @@ if (process.env.NODE_ENV === 'development') {
 // test middleware
 app.use((req, res, next) => {
   const time = (req.requestedTime = new Date().toISOString());
-  console.log(time);
   next();
 });
 
 // routes
+app.use('/', require('./routes/viewRoutes'));
 app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
 
 app.all('*', (req, res, next) => {
-  next(
+  return next(
     new AppError(`cannot get ${req.originalUrl} on this server`, 404)
   );
 });
