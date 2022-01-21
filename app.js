@@ -66,6 +66,7 @@ app.use('/', require('./routes/viewRoutes'));
 app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
+app.use('/api/v1/bookings', require('./routes/bookingRoutes'));
 
 app.all('*', (req, res, next) => {
   return next(
