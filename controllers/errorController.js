@@ -18,9 +18,7 @@ const handleDuplicateErrorDB = err => {
   return new AppError(message, 400);
 };
 const handleValidationErrDB = err => {
-  const errors = Object.values(err.errors).map(
-    value => value.message
-  );
+  const errors = Object.values(err.errors).map(value => value.message);
   const message = `invalid input Data. ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
@@ -48,7 +46,7 @@ const sendErrorProd = (err, req, res) => {
   // A) api
   if (req.originalUrl.startsWith('/api')) {
     if (err.isOperational) {
-      console.log(req.originalUrl);
+      // console.log(req.originalUrl);
       return res.status(err.statusCode).json({
         status: err.status,
         message: err.message
@@ -92,11 +90,9 @@ module.exports = (err, req, res, next) => {
 
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (err.code === 11000) error = handleDuplicateErrorDB(error);
-    if (err.name === 'ValidationError')
-      error = handleValidationErrDB(error);
+    if (err.name === 'ValidationError') error = handleValidationErrDB(error);
     if (err.name === 'JsonWebTokenError') error = handleJwtError();
-    if (err.name === 'TokenExpiredError')
-      error = handleTokenExpires();
+    if (err.name === 'TokenExpiredError') error = handleTokenExpires();
 
     sendErrorProd(error, req, res);
     console.log(error);
