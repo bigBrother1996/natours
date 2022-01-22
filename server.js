@@ -9,14 +9,14 @@ process.on('uncaughtException', err => {
 });
 
 const app = require('./app');
-//remote database
-// const DB = process.env.REMOTE_DATABASE.replace(
-//   '<password>',
-//   process.env.DATABASE_PASSWORD
-// );
+// remote database
+const DB = process.env.REMOTE_DATABASE.replace(
+  '<password>',
+  process.env.DATABASE_PASSWORD
+);
 
 /////local database
-const DB = process.env.LOCAL_DATABASE;
+// const DB = process.env.LOCAL_DATABASE;
 mongoose
   .connect(DB, {
     useNewUrlParser: true
